@@ -1,3 +1,4 @@
+import { CalendarHeart } from "lucide-react";
 import patternImage from "../assets/Y So Serious Pattern.png";
 
 const BookAppointmentSection = () => {
@@ -21,9 +22,9 @@ const BookAppointmentSection = () => {
           Turn emotions into everlasting impressions. Book your 3D casting
           session today and preserve the warmth of togetherness forever.
         </p>
-        <button className="relative px-6 py-3 overflow-hidden font-semibold text-white rounded-full shadow-lg">
-          <span className="absolute inset-0 animate-swirl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-[length:200%_200%] rounded-full z-0"></span>
-          <span className="relative z-10">Book an Appointment</span>
+        <button className="flex items-center gap-2 px-5 py-2 text-[#7808D0] border border-[#7808D0] rounded-full hover:bg-[#7808D0] hover:text-white transition-all duration-300 font-medium">
+          <CalendarHeart size={18} />
+          Book an Appointment
         </button>
       </div>
     </div>

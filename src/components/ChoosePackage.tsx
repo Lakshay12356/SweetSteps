@@ -1,54 +1,126 @@
-import React from 'react';
-import { usePackage } from './UserContext';
+import React, { useEffect, useState } from "react";
+import { usePackage } from "./UserContext";
+import { FaBaby, FaBlind, FaHeart, FaUsers } from "react-icons/fa";
 
-const headings = ["Baby", "Couple", "Elderly", "Family"];
+const headings = [
+  {
+    top: "BABY",
+    bottom: "IMPRESSIONS",
+    icon: <FaBaby size={24} />,
+  },
+  {
+    top: "COUPLE",
+    bottom: "IMPRESSIONS",
+    icon: <FaHeart size={24} />,
+  },
+  {
+    top: "ELDERLY",
+    bottom: "BLESSINGS",
+    icon: <FaBlind size={24} />,
+  },
+  {
+    top: "FAMILY",
+    bottom: "BOND",
+    icon: <FaUsers size={24} />,
+  },
+];
 
 const PackageSelector: React.FC = () => {
-  const { selectedPackage, setSelectedPackage, hasUserInteracted, setHasUserInteracted } = usePackage();
+  const { setSelectedPackage, setHasUserInteracted } = usePackage();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (clickedIndex !== null || hoveredIndex !== null) {
+      const timer = setTimeout(() => {
+        setClickedIndex(null);
+        setHoveredIndex(null);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [clickedIndex, hoveredIndex]);
 
   const handleClick = (index: number) => {
+    setHasUserInteracted(true);
     setSelectedPackage(index);
-    if (!hasUserInteracted) setHasUserInteracted(true);
+    setClickedIndex(index);
   };
 
-  const handleMouseEnter = () => {
-    if (!hasUserInteracted) setHasUserInteracted(true);
+  const handleMouseEnter = (index: number) => {
+    setHasUserInteracted(true);
+    setHoveredIndex(index);
+  };
+
+  const isUserActive = (index: number) => {
+    return clickedIndex === index || hoveredIndex === index;
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 mt-12 mb-12">
+    <div className="flex flex-col items-center gap-8 mt-12">
       <h2 className="text-2xl font-bold text-gray-800">Choose Your Package</h2>
 
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-        {headings.map((title, index) => {
-          const isSelected = selectedPackage === index && hasUserInteracted;
+      <style>
+        {`
+          @keyframes text-rotation {
+            to {
+              rotate: 360deg;
+            }
+          }
+          .text-rotate {
+            animation: text-rotation 8s linear infinite;
+          }
+          .char {
+            position: absolute;
+            inset: 7px;
+          }
+        `}
+      </style>
+
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-10">
+        {headings.map((item, index) => {
+          const isActive = isUserActive(index);
+          const combinedText = `${item.top} ${item.bottom}`;
+          const repeatedText = combinedText.repeat(2).toUpperCase();
 
           return (
-            <div key={index} className="relative overflow-visible">
-              <button
-                onClick={() => handleClick(index)}
-                onMouseEnter={handleMouseEnter}
-                className={`sm:w-24 sm:h-24 w-20 h-20 rounded-full overflow-hidden relative
-                  ${isSelected ? 'bg-[#7A10E2] text-white' : 'bg-[#FEFAFF] text-gray-800'}
-                  flex items-center justify-center font-medium group cursor-pointer shadow
-                  ${hasUserInteracted ? 'transition duration-300' : ''}`}
-              >
-                <span
-                  className={`absolute inset-0 bg-[#7A10E2] rounded-full 
-                    ${isSelected ? 'scale-100' : 'scale-0 group-hover:scale-110'}
-                    ${hasUserInteracted ? 'transition-transform duration-500' : ''}
-                    origin-center z-0`}
-                />
-                <span className={`z-10 px-2 ${hasUserInteracted ? 'transition-colors duration-500 group-hover:text-white' : ''}`}>
-                  {title}
-                </span>
-              </button>
+            <div
+              key={index}
+              className="relative transition-transform duration-300 cursor-pointer group hover:scale-105"
+              onClick={() => handleClick(index)}
+              onMouseEnter={() => handleMouseEnter(index)}
+            >
+              {/* Circular Button */}
+              <div className="w-[150px] h-[150px] rounded-full bg-[#fef6f7] text-[#db5275] border-none grid place-content-center font-semibold overflow-hidden relative transition-all duration-300 ease-in-out">
+                {/* Rotating Text */}
+                <p
+                  className="absolute inset-0 text-rotate"
+                  aria-label={`${item.top} ${item.bottom} circular text`}
+                >
+                  {repeatedText.split('').map((char, charIndex) => (
+                    <span
+                      key={charIndex}
+                      className="char"
+                      style={{ transform: `rotate(${charIndex * 10}deg)` }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  ))}
+                </p>
 
-              {isSelected && hasUserInteracted && (
-                <div className="absolute bottom-[-9px] left-1/2 -translate-x-1/2 w-0 h-0 
-                  border-l-[8px] border-r-[8px] border-t-[10px] 
-                  border-l-transparent border-r-transparent border-t-[#7A10E2]" />
-              )}
+                {/* Center Icon */}
+                <div className="relative w-10 h-10 bg-white text-[#db5275] rounded-full flex items-center justify-center overflow-hidden z-10">
+                  {item.icon}
+                </div>
+              </div>
+
+              {/* Hover Glow */}
+              <div
+                className={`absolute inset-0 rounded-full z-0 transition duration-500 ${
+                  isActive
+                    ? "bg-[#7A10E2]/10"
+                    : "bg-transparent group-hover:bg-[#7A10E2]/10"
+                }`}
+              />
             </div>
           );
         })}

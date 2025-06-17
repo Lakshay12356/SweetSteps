@@ -48,8 +48,8 @@ const services = [
 
 const WhatWeDo: React.FC = () => {
   return (
-    <section className="py-16 bg-[#fefaff] text-gray-800">
-      <div className="max-w-6xl px-6 mx-auto text-center">
+    <section className="py-16 text-gray-800 bg-white">
+      <div data-aos="fade-up" data-aos-delay="150" className="max-w-6xl px-6 mx-auto text-center">
         <h2 className="mb-12 text-4xl font-extrabold">What We Do</h2>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (

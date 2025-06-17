@@ -1,13 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/Logo.png" />
+    <link rel="preload" as="image" href="/src/assets/HeroFrames.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="preload"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Sweet Steps - Capture and preserve your precious moments with our baby impressions and casting services."
+    />
+    <meta
+      name="keywords"
+      content="baby impressions, casting, keepsake, family, memories, art"
+    />
+    <meta name="author" content="Sweet Steps" />
+    <link rel="preconnect" href="/" />
+    <!-- AOS CSS -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      />
+    </noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sweet Steps</title>
   </head>
   <body>
-    <div id="root"></div>
+    <a
+      href="#maincontent"
+      class="skip-link"
+      style="
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      "
+      >Skip to main content</a
+    >
+    <div id="root" tabindex="-1" aria-label="Sweet Steps main content"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

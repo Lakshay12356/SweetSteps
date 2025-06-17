@@ -1,31 +1,65 @@
 import React from 'react';
-import styled from 'styled-components';
 
 const Button: React.FC = () => {
   return (
-    <StyledWrapper>
-      <button className="button" type="button">
-        <p className="button__text" aria-label="Book Now circular text">
-          <span style={{ '--index': 0 } as React.CSSProperties}>B</span>
-          <span style={{ '--index': 1 } as React.CSSProperties}>O</span>
-          <span style={{ '--index': 2 } as React.CSSProperties}>O</span>
-          <span style={{ '--index': 3 } as React.CSSProperties}>K</span>
-          <span style={{ '--index': 4 } as React.CSSProperties} />
-          <span style={{ '--index': 5 } as React.CSSProperties}>N</span>
-          <span style={{ '--index': 6 } as React.CSSProperties}>O</span>
-          <span style={{ '--index': 7 } as React.CSSProperties}>W</span>
-          <span style={{ '--index': 8 } as React.CSSProperties} />
-          <span style={{ '--index': 9 } as React.CSSProperties}>B</span>
-          <span style={{ '--index': 10 } as React.CSSProperties}>O</span>
-          <span style={{ '--index': 11 } as React.CSSProperties}>O</span>
-          <span style={{ '--index': 12 } as React.CSSProperties}>K</span>
-          <span style={{ '--index': 13 } as React.CSSProperties} />
-          <span style={{ '--index': 14 } as React.CSSProperties}>N</span>
-          <span style={{ '--index': 15 } as React.CSSProperties}>O</span>
-          <span style={{ '--index': 16 } as React.CSSProperties}>W</span>
-          <span style={{ '--index': 17 } as React.CSSProperties} />
+    <div className="grid place-content-center">
+      <style>
+        {`
+          @keyframes text-rotation {
+            to {
+              rotate: 360deg;
+            }
+          }
+
+          .text-rotate {
+            animation: text-rotation 8s linear infinite;
+          }
+
+          .button:hover {
+            background: #ffffff;
+            transform: scale(1.05);
+          }
+
+          .button:hover .button__icon {
+            color: #000;
+          }
+
+          .button:hover .button__icon:first-child {
+            transition: transform 0.3s ease-in-out;
+            transform: translate(150%, -150%);
+          }
+
+          .button:hover .button__icon--copy {
+            transition: transform 0.3s ease-in-out 0.1s;
+            transform: translate(0);
+          }
+
+          .char {
+            position: absolute;
+            inset: 7px;
+          }
+        `}
+      </style>
+      <button
+        type="button"
+        className="button w-[150px] h-[150px] rounded-full bg-[#fef6f7] text-[#db5275] border-none grid place-content-center font-semibold overflow-hidden relative transition-all duration-300 ease-in-out"
+      >
+        <p
+          className="absolute inset-0 text-rotate"
+          aria-label="Book Now circular text"
+        >
+          {'BOOK NOW  BOOK NOW'.split('').map((char, index) => (
+            <span
+              key={index}
+              className="char"
+              style={{ transform: `rotate(${index * 19}deg)` }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
         </p>
-        <div className="button__circle" aria-hidden="true">
+
+        <div className="relative w-10 h-10 bg-white text-[#db5275] rounded-full flex items-center justify-center overflow-hidden">
           <svg
             width={14}
             className="button__icon"
@@ -39,7 +73,8 @@ const Button: React.FC = () => {
             />
           </svg>
           <svg
-            className="button__icon button__icon--copy"
+            className="absolute button__icon button__icon--copy"
+            style={{ transform: 'translate(-150%, 150%)' }}
             xmlns="http://www.w3.org/2000/svg"
             width={14}
             fill="none"
@@ -52,81 +87,8 @@ const Button: React.FC = () => {
           </svg>
         </div>
       </button>
-    </StyledWrapper>
+    </div>
   );
 };
-
-const StyledWrapper = styled.div`
-  .button {
-    cursor: pointer;
-    border: none;
-    background: #fef6f7;
-    color: #db5275;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    display: grid;
-    place-content: center;
-    transition: background 300ms, transform 200ms;
-    font-weight: 600;
-  }
-
-  .button__text {
-    position: absolute;
-    inset: 0;
-    animation: text-rotation 8s linear infinite;
-
-    > span {
-      position: absolute;
-      transform: rotate(calc(19deg * var(--index)));
-      inset: 7px;
-    }
-  }
-
-  .button__circle {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    background: #fff;
-    color: #db5275;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .button__icon--copy {
-    position: absolute;
-    transform: translate(-150%, 150%);
-  }
-
-  .button:hover {
-    background: #ffffff;
-    transform: scale(1.05);
-  }
-
-  .button:hover .button__icon {
-    color: #000;
-  }
-
-  .button:hover .button__icon:first-child {
-    transition: transform 0.3s ease-in-out;
-    transform: translate(150%, -150%);
-  }
-
-  .button:hover .button__icon--copy {
-    transition: transform 0.3s ease-in-out 0.1s;
-    transform: translate(0);
-  }
-
-  @keyframes text-rotation {
-    to {
-      rotate: 360deg;
-    }
-  }
-`;
 
 export default Button;

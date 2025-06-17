@@ -1,6 +1,15 @@
-const Button = () => {
+import { useNavigate } from "react-router-dom";
+
+interface ButtonProps {
+  link: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ link }) => {
+  const navigate = useNavigate();
+
   return (
     <button
+      onClick={() => navigate(link)}
       className="group inline-flex items-center gap-3 bg-[#7808d0] text-white font-semibold rounded-full px-6 py-3 transition-colors duration-300 hover:bg-black"
     >
       <span className="relative flex-shrink-0 w-[25px] h-[25px] bg-white text-[#7808d0] rounded-full grid place-items-center overflow-hidden group-hover:text-black transition-colors duration-300">

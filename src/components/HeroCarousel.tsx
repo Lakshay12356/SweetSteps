@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import babyImg from "../assets/HeroFrames.png";
-import coupleImg from "../assets/HeroFrames.png";
-import elderlyImg from "../assets/HeroFrames.png";
-import familyImg from "../assets/HeroFrames.png";
+import babyImg from "../assets/HeroFrames.webp";
+import coupleImg from "../assets/HeroFrames.webp";
+import elderlyImg from "../assets/HeroFrames.webp";
+import familyImg from "../assets/HeroFrames.webp";
 import Button from "./UiComp/explore";
 
 interface Slide {
@@ -62,7 +62,7 @@ const HeroCarousel: React.FC = () => {
 
           {/* Image at right-center */}
           <div className="ml-auto mr-10">
-            <div className="relative w-[32rem] h-[32rem] bg-gray-200 rounded-tl-[80px] rounded-tr-[20px] rounded-bl-[10px] rounded-br-[100px] overflow-hidden origin-top-left">
+            <div className="relative w-[32rem] h-[32rem] bg-white rounded-tl-[80px] rounded-tr-[20px] rounded-bl-[10px] rounded-br-[100px] overflow-hidden origin-top-left">
               <img
                 src={slide.image}
                 alt={slide.text}

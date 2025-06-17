@@ -2,9 +2,11 @@ import React from 'react';
 
 interface CardProps {
   imageUrl: string;
+  alt?: string;
+  loading?: "eager" | "lazy";
 }
 
-const Card: React.FC<CardProps> = ({ imageUrl }) => {
+const Card: React.FC<CardProps> = ({ imageUrl, alt = "Card", loading = "eager" }) => {
   return (
     <div className="flex justify-center">
       <div className="relative w-[90%] sm:w-[70%] md:w-[60%] lg:w-[400px] transition-transform duration-300 ease-in-out group hover:rotate-[5deg]">
@@ -16,7 +18,7 @@ const Card: React.FC<CardProps> = ({ imageUrl }) => {
 
           {/* Inner image */}
           <div className="w-full overflow-hidden bg-transparent border-2 border-black aspect-square">
-            <img src={imageUrl} alt="Card" className="object-contain w-full h-full" />
+            <img src={imageUrl} alt={alt} loading={loading} className="object-contain w-full h-full" />
           </div>
         </div>
       </div>

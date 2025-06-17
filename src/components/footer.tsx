@@ -1,27 +1,33 @@
-import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-import logo from "../assets/Logo.jpg";
+import React from "react";
 import Card from "./UiComp/Socials";
+import { Phone, Mail } from "lucide-react";
+
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#fefaff] ml-10 mr-10 rounded-3xl p-10 text-[#001a2c]">
+    <footer
+      className="bg-[#fefaff] ml-10 mr-10 rounded-3xl p-10 text-[#001a2c]"
+      style={{ minHeight: "200px" }}
+    >
       <div className="flex flex-col justify-between gap-10 mx-auto max-w-7xl md:flex-row">
         {/* Logo and Contact */}
         <div>
           <div className="flex items-center mb-4">
             <img
-              src={logo}
+              src="/src/assets/Logo.webp"
               alt="Sweet Steps Logo"
+              width="40"
+              height="40"
               className="w-10 h-10 mr-2 rounded-full"
             />
             <h2 className="text-2xl font-bold">Sweet Steps</h2>
           </div>
           <p>73/47, Param Hans Marg, Mansarovar</p>
           <div className="flex items-center mt-2">
-            <FaPhoneAlt className="mr-2" />
+            <Phone className="w-4 h-4 mr-2" />
             <span>Call Us: +91-9413867088</span>
           </div>
           <div className="flex items-center mt-2">
-            <FaEnvelope className="mr-2" />
+            <Mail className="w-4 h-4 mr-2" />
             <span>sweetsteps05@gmail.com</span>
           </div>
         </div>

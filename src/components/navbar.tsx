@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../assets/Logo.jpg";
 import { Link } from "react-router-dom";
-import { X, Menu } from "lucide-react";
+import { X, Menu, CalendarHeart } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -20,16 +19,19 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[90%] bg-[#414652]/80 backdrop-blur-sm rounded-full shadow-md m-[2%] z-50 border border-white border-opacity-20">
+      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[80%] bg-[#414652]/80 backdrop-blur-sm rounded-full shadow-md m-[2%] z-50 border border-white border-opacity-20">
         <div className="px-4 mx-auto max-w-7xl">
           <div className="relative flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3 overflow-hidden rounded-full cursor-pointer">
               <img
-                src={Logo}
-                alt="SweetSteps Logo"
+                src="/src/assets/Logo.webp"
+                alt="Sweet Steps Logo"
+                width="40"
+                height="40"
                 className="w-10 h-10 rounded-full"
               />
+
               <span
                 className={`text-2xl font-bold text-white select-none transition-opacity duration-300 ${
                   mobileMenuOpen
@@ -58,20 +60,23 @@ const Navbar: React.FC = () => {
                 </button>
                 {servicesOpen && (
                   <div className="absolute left-0 z-10 w-48 mt-2 bg-white rounded-md shadow-lg">
-                    {["baby-impressions", "couple", "elderly", "family"].map(
-                      (route) => (
-                        <Link
-                          key={route}
-                          to={`/${route}`}
-                          className="block px-4 py-2 text-gray-700 hover:bg-purple-100"
-                          onClick={() => setServicesOpen(false)}
-                        >
-                          {route
-                            .replace("-", " ")
-                            .replace(/\b\w/g, (l) => l.toUpperCase())}
-                        </Link>
-                      )
-                    )}
+                    {[
+                      "baby-impressions",
+                      "couple-impressions",
+                      "elderly-impressions",
+                      "family-impressions",
+                    ].map((route) => (
+                      <Link
+                        key={route}
+                        to={`/${route}`}
+                        className="block px-4 py-2 text-gray-700 hover:bg-purple-100"
+                        onClick={() => setServicesOpen(false)}
+                      >
+                        {route
+                          .replace("-", " ")
+                          .replace(/\b\w/g, (l) => l.toUpperCase())}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
@@ -91,22 +96,19 @@ const Navbar: React.FC = () => {
 
             {/* Desktop CTA */}
             <div className="hidden md:flex">
-              <Link
-                to="/booking"
-                className="px-4 py-2"
-              >
-                <button className="relative px-6 py-3 overflow-hidden font-semibold text-white rounded-full shadow-lg">
-                  <span className="absolute inset-0 animate-swirl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-[length:200%_200%] rounded-full z-0"></span>
-                  <span className="relative z-10">Book an Appointment</span>
+              <Link to="/booking" className="py-2">
+                <button className="flex items-center gap-2 px-5 py-2 text-white border border-[#7808D0] bg-[#7808D0] rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-300 font-medium">
+                  <CalendarHeart size={18} />
+                  Book an Appointment
                 </button>
               </Link>
             </div>
 
             {/* Hamburger Menu - Mobile */}
-            <div className="md:hidden">
+            <div className="flex items-center h-full md:hidden">
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="text-white"
+                className="flex items-center justify-center h-full text-white"
               >
                 <Menu size={28} />
               </button>
